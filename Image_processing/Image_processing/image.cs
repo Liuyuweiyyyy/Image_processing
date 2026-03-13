@@ -13,15 +13,15 @@ namespace Image_processing
     public partial class image : Form
     {
         [DllImport(@"..\..\..\..\x64\Debug\SetImage.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void negative(int[] img, int size);
+        public static extern void negative(byte[] img, int size);
         [DllImport(@"..\..\..\..\x64\Debug\SetImage.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void clockwise90(int[] img, int w, int h);
+        public static extern void clockwise90(byte[] img, int w, int h, int byteDepth);
         [DllImport(@"..\..\..\..\x64\Debug\SetImage.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void inverse90(int[] img, int w, int h);
+        public static extern void inverse90(byte[] img, int w, int h, int byteDepth);
         [DllImport(@"..\..\..\..\x64\Debug\SetImage.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void left_right(int[] img, int w, int h);
+        public static extern void left_right(byte[] img, int w, int h, int byteDepth);
         [DllImport(@"..\..\..\..\x64\Debug\SetImage.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void up_down(int[] img, int w, int h);
+        public static extern void up_down(byte[] img, int w, int h, int byteDepth);
 
         internal Bitmap pBitmap;
         internal ToolStripStatusLabel pf1;
@@ -31,7 +31,7 @@ namespace Image_processing
             InitializeComponent();
         }
 
-        private int[] dyn_bmp2array(Bitmap myBitmap, ref int ByteDepth, ref PixelFormat pixelFormat, ref ColorPalette palette)
+        private byte[] dyn_bmp2array(Bitmap myBitmap, ref int ByteDepth, ref PixelFormat pixelFormat, ref ColorPalette palette)
         {
             int w = myBitmap.Width, h = myBitmap.Height;
             BitmapData byteArray = myBitmap.LockBits(
@@ -40,8 +40,8 @@ namespace Image_processing
                     myBitmap.PixelFormat);
             pixelFormat = myBitmap.PixelFormat;
             palette = myBitmap.Palette;
-            ByteDepth = (int)(byteArray.Stride / w);
-            int[] ImgData = new int[w * h * ByteDepth];
+            ByteDepth = Image.GetPixelFormatSize(myBitmap.PixelFormat) / 8;
+            byte[] ImgData = new byte[w * h * ByteDepth];
             int ByteOfSkip = byteArray.Stride - w * ByteDepth;
 
             unsafe
@@ -64,7 +64,7 @@ namespace Image_processing
             return ImgData;
         }
 
-        private static Bitmap dyn_array2bmp(int[] ImgData, int ByteDepth, PixelFormat pixelFormat, ColorPalette palette) // 限正方形，出灰階
+        private static Bitmap dyn_array2bmp(byte[] ImgData, int ByteDepth, PixelFormat pixelFormat, ColorPalette palette) // 限正方形，出灰階
         {
             int w = (int)Math.Sqrt(ImgData.GetLength(0) / ByteDepth);
             int h = (int)Math.Sqrt(ImgData.GetLength(0) / ByteDepth);
@@ -127,67 +127,41 @@ namespace Image_processing
         public Bitmap rotate(Bitmap src, int flag)
         {
             int w = src.Width, h = src.Height;
-            int[] pixels = new int[w * h];
-            for (int y = 0; y < h; y++)
-            {
-                for (int x = 0; x < w; x++)
-                {
-                    Color c = src.GetPixel(x, y);
-                    pixels[y * w + x] = c.R;
-                }
-            }
+            int byteDepth = 0;
+            PixelFormat pf = 0;
+            ColorPalette pal = null;
+            byte[] pixels = dyn_bmp2array(src, ref byteDepth, ref pf, ref pal);
 
             switch (flag)
             {
                 case 0: // 順時針90度
-                    clockwise90(pixels, w, h);
+                    clockwise90(pixels, w, h, byteDepth);
                     break;
                 case 1: // 逆時針90度
-                    inverse90(pixels, w, h);
+                    inverse90(pixels, w, h, byteDepth);
                     break;
                 case 2: // 左右反轉
-                    left_right(pixels, w, h);
+                    left_right(pixels, w, h, byteDepth);
                     break;
                 case 3: // 上下反轉
-                    up_down(pixels, w, h);
+                    up_down(pixels, w, h, byteDepth);
                     break;
             }
 
-            Bitmap newBmp = new Bitmap(h, w);
-            for (int y = 0; y < w; y++)
-            {
-                for (int x = 0; x < h; x++)
-                {
-                    int v = pixels[y * h + x];
-                    newBmp.SetPixel(x, y, Color.FromArgb(v, v, v));
-                }
-            }
+            Bitmap newBmp = dyn_array2bmp(pixels, byteDepth, pf, pal);
             return newBmp;
         }
 
         public Bitmap Negative(Bitmap src)
         {
-            int w = src.Width, h = src.Height;
-            int[] pixels = new int[w * h];
-            for (int y = 0; y < h; y++)
-            {
-                for (int x = 0; x < w; x++)
-                {
-                    Color c = src.GetPixel(x, y);
-                    pixels[y * w + x] = c.R;
-                }
-            }
+            int byteDepth = 0;
+            PixelFormat pf = 0;
+            ColorPalette pal = null;
+            byte[] pixels = dyn_bmp2array(src, ref byteDepth, ref pf, ref pal);
+
             negative(pixels, pixels.Length);
 
-            Bitmap newBmp = new Bitmap(w, h);
-            for (int y = 0; y < h; y++)
-            {
-                for (int x = 0; x < w; x++)
-                {
-                    int v = pixels[y * w + x];
-                    newBmp.SetPixel(x, y, Color.FromArgb(v, v, v));
-                }
-            }
+            Bitmap newBmp = dyn_array2bmp(pixels, byteDepth, pf, pal);
             return newBmp;
         }
     }

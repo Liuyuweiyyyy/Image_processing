@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Image_processing\\Image_processing\\Image_processing\\Image_processing.csproj",
+      "projectUniqueName": "C:\\Users\\user\\source\\repos\\Image_processing\\Image_processing\\Image_processing.csproj",
       "projectName": "Image_processing",
-      "projectPath": "C:\\Users\\user\\Image_processing\\Image_processing\\Image_processing\\Image_processing.csproj",
+      "projectPath": "C:\\Users\\user\\source\\repos\\Image_processing\\Image_processing\\Image_processing.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Image_processing\\Image_processing\\Image_processing\\obj\\",
+      "outputPath": "C:\\Users\\user\\source\\repos\\Image_processing\\Image_processing\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
