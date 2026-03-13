@@ -1,0 +1,17 @@
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\Image_processing.csproj.GenerateResource.cache
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\Image_processing.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\Image_processing.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\Image_processing.AssemblyInfo.cs
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\Image_processing.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\Image_processing.Form1.resources
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\Image_processing.image.resources
+C:\Users\user\source\repos\Image_processing\Image_processing\bin\Debug\net8.0-windows\Image_processing.exe
+C:\Users\user\source\repos\Image_processing\Image_processing\bin\Debug\net8.0-windows\Image_processing.deps.json
+C:\Users\user\source\repos\Image_processing\Image_processing\bin\Debug\net8.0-windows\Image_processing.runtimeconfig.json
+C:\Users\user\source\repos\Image_processing\Image_processing\bin\Debug\net8.0-windows\Image_processing.dll
+C:\Users\user\source\repos\Image_processing\Image_processing\bin\Debug\net8.0-windows\Image_processing.pdb
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\Image_processing.dll
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\refint\Image_processing.dll
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\Image_processing.pdb
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\Image_processing.genruntimeconfig.cache
+C:\Users\user\source\repos\Image_processing\Image_processing\obj\Debug\net8.0-windows\ref\Image_processing.dll
